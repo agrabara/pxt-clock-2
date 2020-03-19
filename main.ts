@@ -1,4 +1,5 @@
 input.onButtonPressed(Button.A, function () {
+    //ustawienie jednorazowe daty i godziny
     clock.DateTime(
         2020,
         3,
@@ -17,6 +18,18 @@ let day = 0
 let month = 0
 let clock: DS1302.DS1302RTC = null
 I2C_LCD1602.LcdInit(63)
+I2C_LCD1602.BacklightOff()
+I2C_LCD1602.ShowString("Hello", 0, 0)
+I2C_LCD1602.BacklightOn()
+basic.pause(2000)
+I2C_LCD1602.ShowString("Realtime Clock", 0, 0)
+basic.pause(2000)
+I2C_LCD1602.clear()
+//
+// podlaczenie:
+// P13 - CLK
+// P14 - DAT
+// P15 - RST
 clock = DS1302.create(DigitalPin.P13, DigitalPin.P14, DigitalPin.P15)
 basic.forever(function () {
     basic.showLeds(`
@@ -93,4 +106,3 @@ basic.forever(function () {
         `)
     basic.pause(500)
 })
- 
